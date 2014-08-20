@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20140820 14:30:06.350" generator="Robot 2.8.4 (Python 2.7.5 on darwin)">
+<suite source="/Users/sigismondmclaughin/Dev/directory-ionic-nodejs/robot/test/simple_test_suite.robot" id="s1" name="Simple Test Suite">
+<test id="s1-t1" name="Add todo">
+<kw type="kw" name="Selenium2Library.Open Browser">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:5000/#/search</arg>
+<arg>phantomjs</arg>
+</arguments>
+<msg timestamp="20140820 14:30:07.079" level="INFO">Opening browser 'phantomjs' to base url 'http://localhost:5000/#/search'</msg>
+<status status="PASS" endtime="20140820 14:30:10.362" starttime="20140820 14:30:07.079"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Page Should Contain">
+<doc>Verifies that current page contains `text`.</doc>
+<arguments>
+<arg>Employees</arg>
+</arguments>
+<msg timestamp="20140820 14:30:10.377" level="INFO">Current page contains text 'Employees'.</msg>
+<status status="PASS" endtime="20140820 14:30:10.377" starttime="20140820 14:30:10.363"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="PASS" endtime="20140820 14:30:10.377" critical="yes" starttime="20140820 14:30:07.078"></status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="PASS" endtime="20140820 14:30:10.378" starttime="20140820 14:30:06.351"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="1">Critical Tests</stat>
+<stat fail="0" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" pass="1" id="s1" name="Simple Test Suite">Simple Test Suite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
