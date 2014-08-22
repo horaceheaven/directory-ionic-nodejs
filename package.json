@@ -5,5 +5,9 @@
   "private": true,
   "dependencies": {
     "express": "~4.4.3"
-  }
+  },
+  "scripts" : {
+   "poll" : "bash curlCheck.sh"
+  } 
+  
 }
