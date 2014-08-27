@@ -40,7 +40,7 @@ RUN yum -y install firefox.x86_64
 COPY . /src
 RUN cd /src; npm install
 
-RUN /usr/bin/supervisord &
+RUN /usr/bin/supervisord
 
 EXPOSE 22  
 CMD ["echo up"]
