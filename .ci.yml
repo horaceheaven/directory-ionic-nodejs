@@ -1,2 +1,11 @@
+environment:
+   language: javascript
+   services:
+      - google/mysql
+
+
+
 build:
-  run: echo test
+    run: echo hello world
+
+
