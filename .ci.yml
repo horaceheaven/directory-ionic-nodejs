@@ -1,5 +1,5 @@
 environment:
-   language: javascript
+   language: java
    services:
       - google/mysql
 
