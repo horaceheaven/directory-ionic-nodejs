@@ -44,4 +44,4 @@ RUN npm install forever -g
 #RUN /usr/bin/supervisord &
 
 EXPOSE 22 5000 
-CMD ["/src/startup.sh"]
+ENTRYPOINT ["/src/startup.sh"]
