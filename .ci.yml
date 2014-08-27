@@ -1,6 +1,4 @@
 build:
-  environment:
-    language: ruby
   before: # single command or list of commands (run serially on each matrix job)
   - npm start
   run:
