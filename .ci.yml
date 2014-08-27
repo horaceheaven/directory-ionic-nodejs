@@ -1,3 +1,5 @@
+environment:
+  language: javascript
 build:
   before: # single command or list of commands (run serially on each matrix job)
   - npm start
