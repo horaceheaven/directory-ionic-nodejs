@@ -22,7 +22,7 @@ RUN yum -y install python-pip
 RUN mkdir -p /var/run/supervisord  
 ADD supervisord.conf /etc/supervisord.conf  
 ADD requirements.txt /opt/requirements.txt
-ADD directory-app.service /etc/systemd/directory-app.service
+ADD directory-app.service /etc/systemd/system/directory-app.service
 
 RUN systemctl enable directory-app
 RUN systemctl start directory-app
