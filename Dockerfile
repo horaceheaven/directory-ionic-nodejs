@@ -22,6 +22,10 @@ RUN yum -y install python-pip
 RUN mkdir -p /var/run/supervisord  
 ADD supervisord.conf /etc/supervisord.conf  
 ADD requirements.txt /opt/requirements.txt
+ADD directory-app.service /etc/systemd/directory-app.service
+
+RUN systemctl enable directory-app
+RUN systemctl start directory-app
 
 RUN pip install -r /opt/requirements.txt  
 RUN yum -y install fontconfig freetype libfreetype.so.6 libfontconfig.so.1 libstdc++.so.6
