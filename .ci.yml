@@ -3,6 +3,6 @@ environment:
 
 
 build:
-    run:  pybot --variable BROWSER:phantomjs /src/robot/test/simple_test_suite.robot
+    run:  pybot --variable BROWSER:phantomjs /src/robot/test/simple_test_suite.robot && cat /report.html
 
 
