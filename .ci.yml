@@ -1,7 +1,2 @@
-environment:
-  language: javascript
-  vars:
-    TEST: test:test
 build:
-  run:
-    acceptance:  pybot --variable BROWSER:phantomjs robot/test/simple_test_suite.robot
+  run: echo test
