@@ -37,4 +37,4 @@ COPY . /src
 RUN cd /src; npm install
 
 EXPOSE 22  
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/node /src/server.js &"]
