@@ -39,8 +39,9 @@ RUN yum -y install xorg-x11-server-Xvfb.x86_64
 RUN yum -y install firefox.x86_64
 COPY . /src
 RUN cd /src; npm install
+RUN npm install forever -g
 
-RUN /usr/bin/supervisord &
+#RUN /usr/bin/supervisord &
 
 EXPOSE 22  
 CMD ["echo up"]
