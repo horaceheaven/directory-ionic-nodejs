@@ -1,11 +1,8 @@
 environment:
    language: java
-   services:
-      - google/mysql
-
 
 
 build:
-    run: echo hello world
+    run: echo hello
 
 
