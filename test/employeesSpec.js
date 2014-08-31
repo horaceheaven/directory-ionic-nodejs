@@ -47,7 +47,7 @@ var mockcollection = {
 }
 
 var collectionStub = sinon.stub(employees, 'collection');
-collectionStub.withArgs('employee').returns(Q.resolve(mockcollection));
+collectionStub.withArgs('employees').returns(Q.resolve(mockcollection));
 
 
 describe("Emploee Service", function(){

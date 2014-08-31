@@ -23,10 +23,11 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 
 	findById = function(id, collection){
 		var defered = q.defer();
-			collection('employee')
+			collection('employees')
 				.then(function(employeeCollection){
 					employeeCollection.findOne({'id': id}, function(err, employee){
 						if(err){
+							console.log(err);
 							defered.reject(err);
 						}
 
@@ -40,7 +41,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 
 	var findAll = function(collection){
 		var defered = q.defer();
-		collection('employee')
+		collection('employees')
 			.then(function(employeeCollection){
 				employeeCollection.find({}).toArray(function(err, employees){
 					if(err){
@@ -56,7 +57,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 	var findManagees = function(managerId, collection){
 		var defered = q.defer();
 
-		collection('employee')
+		collection('employees')
 			.then(function(employeeCollection){
 				employeeCollection.find({managerId: managerId})
 					.toArray(function(err, managees){
@@ -76,6 +77,6 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 				findManagees : findManagees};
 
 
-})(MongoClient, connString, q, "employee");
+})(MongoClient, connString, q, "employees");
 
 exports.employees = EmployeeDAO;

@@ -13,23 +13,77 @@ var employees = [
     {"id": 11, "firstName": "Steven", "lastName": "Wells", "managerId": 3, "managerName": "John Williams", "reports": 0, "title": "Software Architect", "department": "Engineering", "cellPhone": "617-000-0012", "officePhone": "781-000-0012", "email": "swells@fakemail.com", "city": "Boston, MA", "pic": "Steven_Wells.jpg", "twitterId": "@fakeswells", "blog": "http://coenraets.org"}
 ];
 
-var employees = require('../daos/employeesDAO.js').employees;
+var employeeData = require('../daos/employeesDAO.js').employees;
 
-// db.getById(1).then(function(employee){
-//     console.log(employee);
-// });
 
-// db.getAll().then(function(employees){
-//     console.log(employees);
-// });
+// employeeData.findAll(employeeData.collection)
+//     .then(function(arg){
+//         console.log(arg);
+//     });
 
-// db.getManagees(1).then(function(managees){
-//     console.log(managees);
-// });
+// employeeData.findById(1, employeeData.collection)
+//     .then(function(arg){
+//         console.log(arg);
+//     });
 
-employees.findById(1).then(function(arg){
-    console.log(arg);
-})
+// employeeData.findManagees(1, employeeData.collection)
+//     .then(function(arg){
+//         console.log(arg);
+//     });
+
+exports.api = {};
+
+exports.api.findAll = function(req, res, next){
+    var name = req.query.name;
+    employeeData.findAll(employeeData.collection)
+        .then(function(employees){
+            if (name) {
+                res.send(employees.filter(function(employee) {
+                    return (employee.firstName + ' ' + employee.lastName).toLowerCase().indexOf(name.toLowerCase()) > -1;
+                }));
+            } else {
+                console.log(employees);
+                res.send(employees);
+            }
+        });
+}
+
+exports.api.findById = function(req, res, next){
+     var id = req.params.id;
+
+     employeeData.findById(id, employeeData.collection)
+        .then(function(employee){
+            res.send(employee);
+        });
+}
+
+exports.api.findReports = function(req, res, next){
+     var id = parseInt(req.params.id), response, reports=[];
+
+     employeeData.findById(id, employeeData.collection)
+        .then(function(employee){
+            response = {
+                id: id,
+                firstName: employee.firstName,
+                lastName: employee.lastName,
+                title: employee.title,
+                pic: employee.pic
+            }
+            
+            employeeData.findManagees(id, employeeData.collection)
+                .then(function(employees){
+                   for (var i=0; i<employees.length; i++) {
+                        employee = employees[i];
+                        reports.push({id: employee.id, firstName: employee.firstName, lastName: employee.lastName, title: employee.title, pic: employee.pic});     
+                    }
+                    response.reports = reports;
+                    res.send(response);
+                });
+
+
+        })
+
+}
 
 exports.findAll = function (req, res, next) {
     var name = req.query.name;

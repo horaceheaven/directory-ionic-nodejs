@@ -14,9 +14,13 @@ app.all('*', function(req, res, next) {
 app.get('/employees', employees.findAll);
 app.get('/employees/:id', employees.findById);
 app.get('/employees/:id/reports', employees.findReports);
+app.get('/api/employees', employees.api.findAll);
+app.get('/api/employees/:id/reports', employees.api.findReports);
 
 app.set('port', process.env.PORT || 5000);
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
+
+exports.app = app;
