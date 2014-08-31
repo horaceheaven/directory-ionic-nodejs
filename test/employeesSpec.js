@@ -1,4 +1,17 @@
-var employees = [
+var sinon = require('sinon')
+	, Q = require('Q')
+  , chai = require('chai')
+  , chaiAsPromised = require("chai-as-promised")
+  , employees = require('../daos/employeesDAO.js').employees;
+  expect = chai.expect;
+
+require('mocha-as-promised')();
+
+chai.should();
+
+chai.use(chaiAsPromised);
+
+var mockEmployees = [
     {"id": 0, "firstName": "James", "lastName": "King", "reports": 4, "title": "President and CEO", "department": "Corporate", "cellPhone": "617-000-0001", "officePhone": "781-000-0001", "email": "jking@fakemail.com", "city": "Boston, MA", "pic": "James_King.jpg", "twitterId": "@fakejking", "blog": "http://coenraets.org"},
     {"id": 1, "firstName": "Julie", "lastName": "Taylor", "managerId": 0, "managerName": "James King", "reports": 2, "title": "VP of Marketing", "department": "Marketing", "cellPhone": "617-000-0002", "officePhone": "781-000-0002", "email": "jtaylor@fakemail.com", "city": "Boston, MA", "pic": "Julie_Taylor.jpg", "twitterId": "@fakejtaylor", "blog": "http://coenraets.org"},
     {"id": 2, "firstName": "Eugene", "lastName": "Lee", "managerId": 0, "managerName": "James King", "reports": 0, "title": "CFO", "department": "Accounting", "cellPhone": "617-000-0003", "officePhone": "781-000-0003", "email": "elee@fakemail.com", "city": "Boston, MA", "pic": "Eugene_Lee.jpg", "twitterId": "@fakeelee", "blog": "http://coenraets.org"},
@@ -13,62 +26,46 @@ var employees = [
     {"id": 11, "firstName": "Steven", "lastName": "Wells", "managerId": 3, "managerName": "John Williams", "reports": 0, "title": "Software Architect", "department": "Engineering", "cellPhone": "617-000-0012", "officePhone": "781-000-0012", "email": "swells@fakemail.com", "city": "Boston, MA", "pic": "Steven_Wells.jpg", "twitterId": "@fakeswells", "blog": "http://coenraets.org"}
 ];
 
-var employees = require('../daos/employeesDAO.js').employees;
 
-// db.getById(1).then(function(employee){
-//     console.log(employee);
-// });
-
-// db.getAll().then(function(employees){
-//     console.log(employees);
-// });
-
-// db.getManagees(1).then(function(managees){
-//     console.log(managees);
-// });
-
-employees.findById(1).then(function(arg){
-    console.log(arg);
-})
-
-exports.findAll = function (req, res, next) {
-    var name = req.query.name;
-    if (name) {
-        res.send(employees.filter(function(employee) {
-            return (employee.firstName + ' ' + employee.lastName).toLowerCase().indexOf(name.toLowerCase()) > -1;
-        }));
-    } else {
-        res.send(employees);
+var mockcollection = {
+  findOne : function(id, cb){
+    cb(null, mockEmployees[id.id]);
+  },
+  find : function(filter){
+    var result = mockEmployees;
+    
+    if(filter.managerId === 1){
+      result = [mockEmployees[7], mockEmployees[8]];
     }
-};
-
-exports.findById = function (req, res, next) {
-    var id = req.params.id;
-    res.send(employees[id]);
-};
-
-exports.findReports = function (req, res, next) {
-    var id = parseInt(req.params.id),
-        response,
-        reports = [],
-        employee;
-
-    response = {
-        id: id,
-        firstName: employees[id].firstName,
-        lastName: employees[id].lastName,
-        title: employees[id].title,
-        pic: employees[id].pic
+    
+    var toArray = function(cb){
+      cb(null, result);
     }
+    return {toArray: toArray};
+  },
 
-    for (var i=0; i<employees.length; i++) {
-        employee = employees[i];
-        if (employee.managerId === id) {
-            reports.push({id: employee.id, firstName: employee.firstName, lastName: employee.lastName, title: employee.title, pic: employee.pic});
-        }
-    }
+}
 
-    response.reports = reports;
+var collectionStub = sinon.stub(employees, 'collection');
+collectionStub.withArgs('employee').returns(Q.resolve(mockcollection));
 
-    res.send(response);
-};
+
+describe("Emploee Service", function(){
+  describe('#findById', function(){
+    it('Should find the employee with a specified id', function(){
+      return employees.findById(1, employees.collection).should.eventually.equal(mockEmployees[1]);
+    })
+  });
+
+  describe('#findAll', function(){
+    it('Should return all users', function(){
+      return employees.findAll(employees.collection).should.eventually.equal(mockEmployees);
+    });
+  });
+
+  describe('#findManagees', function(){
+    it('Should return all users who has a manager with the specified id', function(){
+      return employees.findManagees(1, employees.collection).should.deep.eventually.equal([mockEmployees[7], mockEmployees[8]]);
+    });
+  })
+});
