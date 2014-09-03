@@ -1,0 +1,6 @@
+[submodule "docker/docker-ubuntu-jenkins-slave"]
+	path = docker/docker-ubuntu-jenkins-slave
+	url = https://github.com/horaceheaven/docker-ubuntu-jenkins-slave.git
+[submodule "docker/docker-mongodb"]
+	path = docker/docker-mongodb
+	url = https://github.com/horaceheaven/docker-mongodb.git
