@@ -2,11 +2,10 @@ var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
     , q = require('q');
 
-var connString = 'mongodb://127.0.0.1:27017/test';
+var connString =  process.argv[2]||'mongodb://127.0.0.1:27017/test';
 
 var EmployeeDAO = (function(client, connString, q, collectionName){
 	var db, connect, getById, getAll, getManagees;
-
 	collection = function(collectionName){
 		var defered = q.defer();
 		MongoClient.connect(connString, function(err, db) {
