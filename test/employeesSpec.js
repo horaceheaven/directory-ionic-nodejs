@@ -1,5 +1,5 @@
 var sinon = require('sinon')
-	, Q = require('Q')
+	, Q = require('q')
   , chai = require('chai')
   , chaiAsPromised = require("chai-as-promised")
   , employees = require('../daos/employeesDAO.js').employees;
@@ -33,11 +33,11 @@ var mockcollection = {
   },
   find : function(filter){
     var result = mockEmployees;
-    
+
     if(filter.managerId === 1){
       result = [mockEmployees[7], mockEmployees[8]];
     }
-    
+
     var toArray = function(cb){
       cb(null, result);
     }
