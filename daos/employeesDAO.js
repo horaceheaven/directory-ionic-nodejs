@@ -5,9 +5,9 @@ var MongoClient = require('mongodb').MongoClient
 var connString;// =  'mongodb://127.0.0.1:27017/' + process.env["LAST_COMMIT"]||'mongodb://127.0.0.1:27017/test';
 
 if(process.env["LAST_COMMIT"]){
-	connString = 'mongodb://127.0.0.1:27017/' + process.env["LAST_COMMIT"]
+	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/' + process.env["LAST_COMMIT"]
 } else {
-	connString = 'mongodb://127.0.0.1:27017/test'
+	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com/:27017/test'
 }
 var EmployeeDAO = (function(client, connString, q, collectionName){
 	var db, connect, getById, getAll, getManagees;
