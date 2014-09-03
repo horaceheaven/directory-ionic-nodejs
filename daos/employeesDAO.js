@@ -2,8 +2,13 @@ var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
     , q = require('q');
 
-var connString =  process.argv[2]||'mongodb://127.0.0.1:27017/test';
+var connString;// =  'mongodb://127.0.0.1:27017/' + process.env["LAST_COMMIT"]||'mongodb://127.0.0.1:27017/test';
 
+if(process.env["LAST_COMMIT"]){
+	connString = 'mongodb://127.0.0.1:27017/' + process.env["LAST_COMMIT"]
+} else {
+	connString = 'mongodb://127.0.0.1:27017/test'
+}
 var EmployeeDAO = (function(client, connString, q, collectionName){
 	var db, connect, getById, getAll, getManagees;
 	collection = function(collectionName){
@@ -32,10 +37,10 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 
 						defered.resolve(employee);
 					});
-				
+
 				});
 
-		return defered.promise;	
+		return defered.promise;
 	}
 
 	var findAll = function(collection){
@@ -70,9 +75,9 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 		return defered.promise;
 	};
 
-	return {	findById :  findById, 
-				collection : collection, 
-				findAll : findAll, 
+	return {	findById :  findById,
+				collection : collection,
+				findAll : findAll,
 				findManagees : findManagees};
 
 
