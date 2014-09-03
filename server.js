@@ -14,8 +14,7 @@ app.all('*', function(req, res, next) {
 app.get('/employees', employees.findAll);
 app.get('/employees/:id', employees.findById);
 app.get('/employees/:id/reports', employees.findReports);
-app.get('/api/employees', employees.api.findAll);
-app.get('/api/employees/:id/reports', employees.api.findReports);
+//app.get('/api/employees/:id/reports', employees.api.findReports);
 
 app.set('port', process.env.PORT || 5000);
 
