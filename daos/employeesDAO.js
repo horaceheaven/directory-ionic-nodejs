@@ -2,7 +2,6 @@ var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
     , q = require('q');
 
-var connString;// =  'mongodb://127.0.0.1:27017/' + process.env["LAST_COMMIT"]||'mongodb://127.0.0.1:27017/test';
 
 if(process.env["LAST_COMMIT"]){
 	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/' + process.env["LAST_COMMIT"]
@@ -10,6 +9,7 @@ if(process.env["LAST_COMMIT"]){
 } else {
 	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com/:27017/test'
 }
+
 var EmployeeDAO = (function(client, connString, q, collectionName){
 	var db, connect, getById, getAll, getManagees;
 	collection = function(collectionName){
@@ -35,7 +35,6 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 							console.log(err);
 							defered.reject(err);
 						}
-
 						defered.resolve(employee);
 					});
 
@@ -69,7 +68,6 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 						if(err){
 							defered.reject(err);
 						}
-
 						defered.resolve(managees);
 					});
 			}).done();

@@ -4,10 +4,10 @@ var request = require('supertest')
 var app = require('../server.js').app;
 
 
-describe('GET /api/employees/1', function(){
+describe('GET /employees/1/reports', function(){
   it('respond with json', function(done){
     request(app)
-      .get('/api/employees/1/reports')
+      .get('/employees/1/reports')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
