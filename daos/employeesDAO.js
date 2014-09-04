@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
-    , q = require('q');
+    , q = require('q'); 
 
 
 if(process.env["MONGO_DB_NAME"]){
