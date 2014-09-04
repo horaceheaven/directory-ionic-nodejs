@@ -5,7 +5,6 @@ var MongoClient = require('mongodb').MongoClient
 
 if(process.env["LAST_COMMIT"]){
 	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/' + process.env["LAST_COMMIT"]
-  console.log("Connection string: " + connString)
 } else {
 	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com/:27017/test'
 }
