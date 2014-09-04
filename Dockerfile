@@ -6,7 +6,7 @@ RUN yum -y install openssh-server
 RUN yum -y install supervisor  
 RUN yum -y install java-1.7.0-openjdk
   
-RUN     rpm -Uvh http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
+RUN     rpm -Uvh http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-1.noarch.rpm
 RUN yum -y install nodejs npm --enablerepo=epel
 RUN yum -y install git
 RUN echo "root:password" | chpasswd  
