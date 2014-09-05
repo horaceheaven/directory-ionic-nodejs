@@ -6,3 +6,9 @@ Add todo
     Sleep    20s
     Open Browser    http://localhost:5000/#/search    phantomjs
     Page Should Contain  Employees
+
+*** Test Case ***
+Check If Employee Exists
+    Open Browser  http://localhost:5000/#/employees/0  phantomjs
+    Sleep 5s
+    Page Should Contain James King
