@@ -9,6 +9,6 @@ Add todo
 
 *** Test Case ***
 Check If Employee Exists
-    Open Browser    http://localhost:5000/#/employees/0  firefox
+    Open Browser    http://localhost:5000/#/employees/0    firefox
     Sleep    20s
     Page Should Contain  James King
