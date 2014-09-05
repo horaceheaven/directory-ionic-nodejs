@@ -38,7 +38,7 @@ RUN ln -s /opt/phantomjs-1.9.7-linux-x86_64/bin/phantomjs /usr/local/bin/phantom
 RUN yum -y install xorg-x11-server-Xvfb.x86_64
 RUN yum -y install firefox.x86_64
 #COPY . /src
-RUN cd /src; npm install
+#RUN cd /src; npm install
 RUN npm install forever -g
 
 #RUN /usr/bin/supervisord &
