@@ -37,11 +37,10 @@ RUN tar xvf /opt/phantomjs-1.9.7-linux-x86_64.tar.bz2 -C /opt
 RUN ln -s /opt/phantomjs-1.9.7-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
 RUN yum -y install xorg-x11-server-Xvfb.x86_64
 RUN yum -y install firefox.x86_64
-COPY . /src
+#COPY . /src
 RUN cd /src; npm install
 RUN npm install forever -g
 
 #RUN /usr/bin/supervisord &
-
-EXPOSE 22 5000 
-ENTRYPOINT ["/src/startup.sh"]
+EXPOSE 22 5000
+CMD ["/usr/sbin/sshd -D"]
