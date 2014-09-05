@@ -9,6 +9,6 @@ Add todo
 
 *** Test Case ***
 Check If Employee Exists
-    Open Browser  http://localhost:5000/#/employees/0  phantomjs
-    Sleep 5s
-    Page Should Contain James King
+    Open Browser    http://localhost:5000/#/employees/0  phantomjs
+    Sleep    5s
+    Page Should Contain  James King
