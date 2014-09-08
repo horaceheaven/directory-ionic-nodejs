@@ -5,10 +5,10 @@ var MongoClient = require('mongodb').MongoClient
 
 if(process.env["MONGO_DB_NAME"]){
 	//connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/' + process.env["MONGO_DB_NAME"];
-  connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/test_data';
+  connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/test_db';
   console.log("connection string: " + connString);
 } else {
-	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/test_data';
+	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/test_db';
   console.log("connection string: " + connString);
 }
 
