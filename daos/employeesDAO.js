@@ -1,12 +1,14 @@
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
-    , q = require('q'); 
+    , q = require('q');
 
 
 if(process.env["MONGO_DB_NAME"]){
-	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/' + process.env["MONGO_DB_NAME"]
+	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com:27017/' + process.env["MONGO_DB_NAME"];
+  console.log("connection string: " + connString);
 } else {
-	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com/:27017/test'
+	connString = 'mongodb://ec2-54-91-88-251.compute-1.amazonaws.com/:27017/test';
+  console.log("connection string: " + connString);
 }
 
 var EmployeeDAO = (function(client, connString, q, collectionName){
@@ -15,6 +17,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 		var defered = q.defer();
 		MongoClient.connect(connString, function(err, db) {
 	 		if(err){
+        console.log("failed to connect to mongodb");
 	 			defered.reject(err);
 	 		}
 
