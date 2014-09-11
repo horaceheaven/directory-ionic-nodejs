@@ -17,9 +17,6 @@ RUN npm install -g mocha
 
 EXPOSE 5000
 
-# Change the root user's password
-RUN echo "root:password" | chpasswd
+COPY . /
 
-COPY . /src
-
-CMD cd /src; npm install; npm start
+CMD npm install; npm start
