@@ -19,8 +19,4 @@ EXPOSE 5000
 
 COPY . /src
 
-RUN pwd; ls
-
-RUN cd /src; npm install
-
-CMD cd /src; npm start
+CMD cd /src; npm install; npm start
