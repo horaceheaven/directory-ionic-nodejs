@@ -18,3 +18,5 @@ RUN npm install -g mocha
 EXPOSE 5000
 
 COPY . /src
+
+CMD cd /src; npm install; npm start
