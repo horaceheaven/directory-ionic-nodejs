@@ -16,7 +16,3 @@ RUN apt-get -y install nodejs nodejs-legacy npm mongodb-org
 RUN npm install -g mocha
 
 EXPOSE 5000
-
-COPY . /
-
-CMD npm install; npm start
