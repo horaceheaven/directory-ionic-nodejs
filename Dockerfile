@@ -1,46 +1,20 @@
-FROM fedora:latest  
-MAINTAINER Sigismond McLaughlin "smclaughlin@medullan.com"  
-  
-#RUN yum -y update  
-RUN yum -y install openssh-server  
-RUN yum -y install supervisor  
-RUN yum -y install java-1.7.0-openjdk
-  
-RUN     rpm -Uvh http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-1.noarch.rpm
-RUN yum -y install nodejs npm --enablerepo=epel
-RUN yum -y install git
-RUN echo "root:password" | chpasswd  
-RUN useradd jenkins  
-RUN echo "jenkins:jenkins" | chpasswd  
-  
-RUN mkdir -p /var/run/sshd  
-RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''  
-RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd  
+FROM ubuntu:latest
+MAINTAINER Horace Heaven "hheaven@medullan.com"
 
-RUN yum -y install python-pip
-  
-RUN mkdir -p /var/run/supervisord  
-ADD supervisord.conf /etc/supervisord.conf  
-ADD requirements.txt /opt/requirements.txt
-ADD directory-app.service /etc/systemd/system/directory-app.service
+# Import MongoDB public GPG key AND create a MongoDB list file
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 
-#RUN systemctl enable directory-app
-#RUN systemctl start directory-app
+RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
 
-RUN pip install -r /opt/requirements.txt  
-RUN yum -y install fontconfig freetype libfreetype.so.6 libfontconfig.so.1 libstdc++.so.6
-RUN yum -y install wget
-RUN yum -y install bzip2
-RUN cd /opt
-RUN wget -O /opt/phantomjs-1.9.7-linux-x86_64.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2
-RUN tar xvf /opt/phantomjs-1.9.7-linux-x86_64.tar.bz2 -C /opt
-RUN ln -s /opt/phantomjs-1.9.7-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
-RUN yum -y install xorg-x11-server-Xvfb.x86_64
-RUN yum -y install firefox.x86_64
-#COPY . /src
-#RUN cd /src; npm install
-RUN npm install forever -g
+# Update software package
+RUN apt-get -y update
 
-#RUN /usr/bin/supervisord &
-EXPOSE 22 5000
+# Install nodejs programs TODO: update to use mongo-client
+RUN apt-get -y install nodejs nodejs-legacy npm mongodb-org
+
+# Install mocha
+RUN npm install -g mocha
+
+EXPOSE 5000
+
 CMD ["/usr/sbin/sshd -D"]
