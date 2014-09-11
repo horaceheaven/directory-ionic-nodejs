@@ -17,4 +17,10 @@ RUN npm install -g mocha
 
 EXPOSE 5000
 
-CMD ["/usr/sbin/sshd -D"]
+COPY . /src
+
+RUN pwd; ls
+
+RUN cd /src; npm install
+
+CMD cd /src; npm start
