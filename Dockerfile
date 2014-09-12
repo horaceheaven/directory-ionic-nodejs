@@ -19,6 +19,4 @@ EXPOSE 5000
 
 COPY . /src
 
-CMD mongoimport --host ec2-54-234-127-215.compute-1.amazonaws.com:27017 --db test_db --collection employees < test/data/test-data.json
-
-CMD cd /src; ; npm install; npm start
+CMD cd /src; mongoimport --host ec2-54-196-235-6.compute-1.amazonaws.com:27017 --db test_db --collection employees < test/data/test-data.json; npm install; npm start
