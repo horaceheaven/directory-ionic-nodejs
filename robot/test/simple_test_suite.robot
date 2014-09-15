@@ -4,23 +4,35 @@ Library           SauceLabs
 
 
 *** Variables ***
-
+${BROWSER}  firefox
 ${REMOTE_URL}
 ${DESIRED_CAPABILITIES}
-${APPLICATION_URL}
+
+Open test browser
+    Open browser  about:  ${BROWSER}
+    ...  remote_url=${REMOTE_URL}
+    ...  desired_capabilities=${DESIRED_CAPABILITIES}
 
 *** Test Case ***
 Check Employee list title
-    Open Browser    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/search    firefox
-    ...  remote_url=http://lwhiteley:e33ae43c-1d3c-4e0b-ac8d-604f88df4bd1@ondemand.saucelabs.com:80/wd/hub
-    ...  desired_capabilities="build:1,platform:Windows 8.1,browserName:internet explorer,version:11"
+    Open Browser    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/search    ${BROWSER}
     Sleep    5s
     Page Should Contain  Employees
 
 *** Test Case ***
 Validate first employee in list
-    Open Browser    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/employees/0    firefox
-    ...  remote_url=http://lwhiteley:e33ae43c-1d3c-4e0b-ac8d-604f88df4bd1@ondemand.saucelabs.com:80/wd/hub
-    ...  desired_capabilities="build:build:$BUILD_NUMBER,platform:Windows 8.1,browserName:internet explorer,version:11"
+    Open Browser    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/employees/0    ${BROWSER}
     Sleep    5s
     Page Should Contain  James King
+
+Open test browser
+    Open browser  about:  ${BROWSER}
+    ...  remote_url=${REMOTE_URL}
+    ...  desired_capabilities=${DESIRED_CAPABILITIES}
+
+Close test browser
+    Run keyword if  '${REMOTE_URL}' != ''
+    ...  Report Sauce status
+    ...  ${SUITE_NAME} | ${TEST_NAME}
+    ...  ${SUITE_STATUS}  ${TEST_TAGS}  ${REMOTE_URL}
+    Close all browsers
