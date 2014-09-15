@@ -8,14 +8,11 @@ ${BROWSER}  firefox
 ${REMOTE_URL}
 ${DESIRED_CAPABILITIES}
 
-Open test browser
-    Open browser  about:  ${BROWSER}
-    ...  remote_url=${REMOTE_URL}
-    ...  desired_capabilities=${DESIRED_CAPABILITIES}
-
 *** Test Case ***
 Check Employee list title
     Open Browser    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/search    ${BROWSER}
+    ...  remote_url=${REMOTE_URL}
+    ...  desired_capabilities=${DESIRED_CAPABILITIES}
     Sleep    5s
     Page Should Contain  Employees
 
