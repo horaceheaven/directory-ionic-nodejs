@@ -1,7 +1,7 @@
 echo "Waiting for application server on $1..."
 
-echo "REMOTE_URL: $1"
-echo "DESIRED_CAPABILITIES: $2"
+echo "REMOTE_URL: $2"
+echo "DESIRED_CAPABILITIES: $3"
 
 CODE=
 while true; do
@@ -9,7 +9,7 @@ while true; do
   if [ $CODE -eq "200" ]
     then
       echo "Start robot tests"
-      pybot -v $1 -v $2 $3
+      pybot -v $2 -v $3 $4
       echo "Finish robot tests"
     exit 0
   fi
