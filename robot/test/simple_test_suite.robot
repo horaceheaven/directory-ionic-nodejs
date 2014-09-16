@@ -11,7 +11,7 @@ ${DESIRED_CAPABILITIES}
 Suite Setup		Open test browser
 Suite Teardown     Close test browser
 
-*** Test Case ***
+*** Test Cases ***
 Check Employee list title
     Go To    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/search
     Sleep    5s
