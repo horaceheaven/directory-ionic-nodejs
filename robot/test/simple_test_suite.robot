@@ -29,6 +29,6 @@ Open test browser
 
 Close test browser
     Run keyword if  '${REMOTE_URL}' != ''
-    ...  ${SUITE_NAME} | ${TEST_NAME}
+    ...  ${SUITE_NAME}
     ...  ${SUITE_STATUS}  ${TEST_TAGS}  ${REMOTE_URL}
     Close all browsers
