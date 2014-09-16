@@ -14,7 +14,6 @@ Open test browser
     ...  remote_url=${REMOTE_URL}
     ...  desired_capabilities=${DESIRED_CAPABILITIES}
     Maximize Browser Window
-    Set Selenium Speed    ${DELAY}
     Check Employee list title
 
 *** Test Case ***
