@@ -18,13 +18,13 @@ Open test browser
 
 *** Test Case ***
 Check Employee list title
-    Go To    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/search    ${BROWSER}
+    Go To    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/search
     Sleep    5s
     Page Should Contain  Employees
 
 *** Test Case ***
 Validate first employee in list
-    Go To    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/employees/0    ${BROWSER}
+    Go To    http://ec2-54-196-235-6.compute-1.amazonaws.com:5000/#/employees/0
     Sleep    5s
     Page Should Contain  James King
 
