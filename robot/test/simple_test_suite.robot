@@ -1,15 +1,13 @@
 *** Settings ***
 Library           Selenium2Library
 Library           SauceLabs
-
+Suite Setup		Open test browser
+Suite Teardown     Close test browser
 
 *** Variables ***
 ${BROWSER}  firefox
 ${REMOTE_URL}
 ${DESIRED_CAPABILITIES}
-
-Suite Setup		Open test browser
-Suite Teardown     Close test browser
 
 *** Test Cases ***
 Check Employee list title
