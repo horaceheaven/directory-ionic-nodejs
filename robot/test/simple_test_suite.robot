@@ -10,7 +10,7 @@ ${DESIRED_CAPABILITIES}
 
 *** Test Case ***
 Open test browser
-    Open browser  http://ec2-54-196-235-6.compute-1.amazonaws.com:5000  ${BROWSER}
+    Open browser  http://ec2-54-196-235-6.compute-1.amazonaws.com:5000    ${BROWSER}
 ...  remote_url=${REMOTE_URL}
 ...  desired_capabilities=${DESIRED_CAPABILITIES}
 
