@@ -1,8 +1,8 @@
 *** Settings ***
 Library           Selenium2Library
 Library           SauceLabs
-Suite Setup		Open test browser
-Suite Teardown     Close test browser
+Suite Setup		Open Test Browser
+Suite Teardown     Close All Browsers
 
 *** Variables ***
 ${BROWSER}  firefox
@@ -21,14 +21,8 @@ Validate first employee in list
     Page Should Contain  James King
 
 *** Keywords ***
-Open test browser
+Open Test Browser
     Open browser  http://ec2-54-196-235-6.compute-1.amazonaws.com:5000    ${BROWSER}
     ...  remote_url=${REMOTE_URL}
     ...  desired_capabilities=${DESIRED_CAPABILITIES}
     Maximize Browser Window
-
-Close test browser
-    Run keyword if  '${REMOTE_URL}' != ''
-    ...  ${SUITE_NAME}
-    ...  ${SUITE_STATUS}  ${TEST_TAGS}  ${REMOTE_URL}
-    Close all browsers
