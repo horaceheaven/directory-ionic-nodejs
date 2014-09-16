@@ -13,6 +13,9 @@ Open test browser
     Open browser  http://ec2-54-196-235-6.compute-1.amazonaws.com:5000    ${BROWSER}
 ...  remote_url=${REMOTE_URL}
 ...  desired_capabilities=${DESIRED_CAPABILITIES}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Check Employee list title
 
 *** Test Case ***
 Check Employee list title
