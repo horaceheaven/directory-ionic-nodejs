@@ -7,7 +7,7 @@ CODE=
 while true; do
   CODE=$(curl -sL -w "%{http_code}" "$1" -o /dev/null)
   if [ $CODE -eq "200" ]
-    then
+    then 
       echo "Start robot tests"
       pybot -v "$2" -v "$3" "$4"
       echo "Finish robot tests"
