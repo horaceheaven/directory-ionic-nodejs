@@ -12,6 +12,6 @@ while true; do
       pybot -v "$2" -v "$3" "$4"
       echo "Finish robot tests"
     exit 0
-  fi 
-  sleep 1
+  fi
+  sleep 1 
 done
