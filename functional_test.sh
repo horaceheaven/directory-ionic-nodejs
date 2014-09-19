@@ -13,5 +13,5 @@ while true; do
       echo "Finish robot tests"
     exit 0
   fi
-  sleep 1 
+  sleep 1  
 done
