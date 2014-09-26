@@ -5,6 +5,6 @@ Description=nodeapp
 EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
-ExecStart=/usr/bin/docker run --name %p -p %i:5000 horaceheaven/directory-ionic-nodejs:2daf4495ad52bdbc2a70b2a8bf11c813ce7aa420
+ExecStart=/usr/bin/docker run --name %p -p %i:5000 medullan/directory-ionic-nodejs:2daf4495ad52bdbc2a70b2a8bf11c813ce7aa420
 ExecStop=/usr/bin/docker stop %p
 ExecStop=/usr/bin/docker rm %p
