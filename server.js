@@ -2,7 +2,7 @@ var express = require('express'),
     employees = require('./routes/employees'),
     app = express();
 
-app.use(express.static(path.join(__dirname, 'www')));
+app.use(express.static('www'));
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {
