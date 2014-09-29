@@ -1,4 +1,4 @@
-echo "Waiting for application server on $3..."
+echo "Waiting for application server on $1:$2"
 
 echo "REMOTE_URL: $4"
 echo "DESIRED_CAPABILITIES: '$5'"
