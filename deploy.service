@@ -3,5 +3,5 @@ Description=nodeapp
 
 [Service]
 EnvironmentFile=/etc/environment
-ExecStart=/usr/bin/docker run --rm --name %p -p %i:5000 sinistersig/directory
+ExecStart=/usr/bin/docker run --rm --name %p -p %i:5000 horaceheaven/directory-ionic-nodejs:%p
 ExecStop=/usr/bin/docker stop %p
