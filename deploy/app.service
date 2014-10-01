@@ -2,6 +2,8 @@
 Description=nodeapp
 
 [Service]
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
 EnvironmentFile=/etc/environment
-ExecStart=/usr/bin/docker run --rm --name %p -p %i:5000 horaceheaven/directory-ionic-nodejs:%p
+ExecStart=/usr/bin/docker run --rm --name %p -p %i:5000 medullan/directory-ionic-nodejs:%p
 ExecStop=/usr/bin/docker stop %p
