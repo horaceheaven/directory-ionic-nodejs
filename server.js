@@ -1,8 +1,9 @@
 var express = require('express'),
     employees = require('./routes/employees'),
+    path = require('path'),
     app = express();
 
-app.use(express.static('www'));
+app.use(express.static(path.join(__dirname, 'www')));
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {
@@ -21,4 +22,4 @@ app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-exports.app = app;
+exports.app = app;s
