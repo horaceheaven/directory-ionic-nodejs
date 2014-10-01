@@ -2,20 +2,17 @@ var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
     , q = require('q');
 
-var mongoDBName = process.env["MONGO_DB_NAME"];
-var mongoDBUrl = process.env["MONGO_DB_URL"];
-var mongoDBPort = process.env["MONGO_DB_PORT"];
+var mongoDBName = process.env["MONGO_DB_NAME"] || "test_db";
+var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://54.205.85.64";
+var mongoDBPort = process.env["MONGO_DB_PORT"] || "27017";
 
 console.log("Mongo DB Name: " + mongoDBName);
 console.log("Mongo DB URL: " + mongoDBUrl);
 console.log("Mongo DB Port: " + mongoDBPort);
 
 if( mongoDBName && mongoDBUrl && mongoDBPort ){
-	connString = 'mongodb://'+ mongoDBUrl +':'+ mongoDBPort +'/' + mongoDBName;
-  console.log("Using environment variable for connection string: " + connString);
-} else {
-	connString = 'mongodb://54.205.85.64:27017/test_db';
-  console.log("Fallback connection string for testing: " + connString);
+	connString = mongoDBUrl +':'+ mongoDBPort +'/' + mongoDBName;
+  console.log("Connection string: " + connString);
 }
 
 var EmployeeDAO = (function(client, connString, q, collectionName){
