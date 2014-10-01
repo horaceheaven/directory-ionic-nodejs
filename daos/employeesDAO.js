@@ -14,7 +14,7 @@ if( mongoDBName && mongoDBUrl && mongoDBPort ){
 	connString = 'mongodb://'+ mongoDBUrl +':'+ mongoDBPort +'/' + mongoDBName;
   console.log("Using environment variable for connection string: " + connString);
 } else {
-	connString = 'mongodb://ec2-54-234-127-215.compute-1.amazonaws.com:27017/test_db';
+	connString = 'mongodb://54.205.85.64:27017/test_db';
   console.log("Fallback connection string for testing: " + connString);
 }
 
