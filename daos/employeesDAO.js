@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient
     , q = require('q');
 
 var mongoDBName = process.env["MONGO_DB_NAME"] || "test_db";
-var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://54.205.85.64";
+var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://54.82.47.209";
 var mongoDBPort = process.env["MONGO_DB_PORT"] || "27017";
 
 console.log("Mongo DB Name: " + mongoDBName);
