@@ -3,7 +3,9 @@ var express = require('express'),
     path = require('path'),
     app = express();
 
+var serveStatic = require('serve-static')
 app.use(express.static(path.join(__dirname, 'www')));
+app.use('/master', serveStatic('www'));
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {
