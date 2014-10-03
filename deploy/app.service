@@ -2,8 +2,12 @@
 Description=nodeapp
 
 [Service]
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
 EnvironmentFile=/etc/environment
-ExecStart=/usr/bin/docker run --rm --name %p -p %i:5000 medullan/directory-ionic-nodejs:%p
-ExecStop=/usr/bin/docker stop %p
+ExecStartPre=/usr/bin/docker pull horaceheaven/directory-ionic-nodejs:latest
+ExecStart=/usr/bin/docker run --rm --name %p -p %i:5000 horaceheaven/directory-ionic-nodejs:latest
+ExecStartPost=/usr/bin/etcdctl set /app/%p/%i ${COREOS_PRIVATE_IPV4}:%i
+ExecStop=/usr/bin/docker kill %p
+ExecStopPost=/usr/bin/etcdctl rm /app/%p/%i
+
+[X-Fleet]
+X-Conflicts=%p@%i.service
