@@ -5,7 +5,7 @@ var express = require('express'),
 
 var serveStatic = require('serve-static')
 app.use(express.static(path.join(__dirname, 'www')));
-app.use('/latest', serveStatic('www'));
+app.use(process.env['NODE_ENV'], serveStatic('www'));
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {
