@@ -20,7 +20,7 @@ angular.module('directory.controllers', [])
         var branch;
         console.log('details');
         branch = $location.absUrl().split("/")[3];
-        scope.branch = branch;
+        $scope.branch = branch;
         $scope.employee = Employees.get({employeeId: $stateParams.employeeId});
     })
 
