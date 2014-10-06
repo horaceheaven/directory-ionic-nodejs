@@ -5,7 +5,7 @@ var express = require('express'),
 
 var serveStatic = require('serve-static')
 app.use(express.static(path.join(__dirname, 'www')));
-app.use('/master', serveStatic('www'));
+app.use('/latest', serveStatic('www'));
 
 // CORS (Cross-Origin Resource Sharing) headers to support Cross-site HTTP requests
 app.all('*', function(req, res, next) {
@@ -15,8 +15,8 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/*/employees', employees.findAll);
-app.get('/*/master/employees/:id', employees.findById);
-app.get('/*/master/employees/:id/reports', employees.findReports);
+app.get('/*/employees/:id', employees.findById);
+app.get('/*/employees/:id/reports', employees.findReports);
 
 app.set('port', process.env.PORT || 5000);
 
