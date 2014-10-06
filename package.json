@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "~4.4.3",
     "mongodb": "~1.4.9",
-    "q": "~1.0.1"
+    "q": "~1.0.1",
+    "serve-static": "~1.6.3"
   },
   "scripts": {
     "poll": "bash curlCheck.sh"

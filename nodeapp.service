@@ -1,7 +1,0 @@
-[Unit]
-Description=nodeapp
-
-[Service]
-EnvironmentFile=/etc/environment
-ExecStart=/usr/bin/docker run --rm --name %p -p %i:5000 sinistersig/directory
-ExecStop=/usr/bin/docker stop %p
