@@ -4,3 +4,6 @@ angular.module('directory.services', ['ngResource'])
         var branch = $location.path().split("/")[1];
         return $resource( '/' + branch + '/employees/:employeeId/:data');
     });
+
+
+    
