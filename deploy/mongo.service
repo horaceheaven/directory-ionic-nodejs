@@ -1,0 +1,8 @@
+[Unit]
+Description=mongo
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --rm --name mongo -p 27017:27017 mongo:2.7.6
+ExecStop=/usr/bin/docker stop mongo
