@@ -19,7 +19,7 @@ angular.module('directory.controllers', [])
     .controller('EmployeeDetailCtrl', function($scope, $stateParams, Employees, $location) {
         var branch;
         console.log('details');
-        branch = $location.path().split("/")[1];
+        branch = $location.absUrl().split("/")[3];
         scope.branch = branch;
         $scope.employee = Employees.get({employeeId: $stateParams.employeeId});
     })

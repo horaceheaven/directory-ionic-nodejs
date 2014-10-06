@@ -19,23 +19,23 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         $stateProvider
 
             .state('search', {
-                url: '/:branch/search',
+                url: '/search',
                 templateUrl: 'templates/employee-list.html',
                 controller: 'EmployeeListCtrl'
             })
 
             .state('employee', {
-                url: '/:branch/employees/:employeeId',
+                url: '/employees/:employeeId',
                 templateUrl: 'templates/employee-detail.html',
                 controller: 'EmployeeDetailCtrl'
             })
 
             .state('reports', {
-                url: '/:branch/employees/:employeeId/reports',
+                url: '/employees/:employeeId/reports',
                 templateUrl: 'templates/employee-reports.html',
                 controller: 'EmployeeReportsCtrl'
             });
 
-        $urlRouterProvider.otherwise('/:branch/search');
+        $urlRouterProvider.otherwise('/search');
 
     });
