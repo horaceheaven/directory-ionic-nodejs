@@ -27,6 +27,7 @@ exports.findById = function(req, res, next){
 }
 
 exports.findReports = function(req, res, next){
+
      var id = parseInt(req.params.id), response, reports=[];
 
      employeeData.findById(id, employeeData.collection)
@@ -38,18 +39,16 @@ exports.findReports = function(req, res, next){
                 title: employee.title,
                 pic: employee.pic
             }
-            
+
             employeeData.findManagees(id, employeeData.collection)
                 .then(function(employees){
                    for (var i=0; i<employees.length; i++) {
                         employee = employees[i];
-                        reports.push({id: employee.id, firstName: employee.firstName, lastName: employee.lastName, title: employee.title, pic: employee.pic});     
+                        reports.push({id: employee.id, firstName: employee.firstName, lastName: employee.lastName, title: employee.title, pic: employee.pic});
                     }
                     response.reports = reports;
                     res.send(response);
                 });
-
-
         })
 
 }
