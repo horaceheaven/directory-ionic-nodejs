@@ -2,6 +2,7 @@
 Description=nodeapp
 
 [Service]
+User=core
 EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill %p
 ExecStartPre=-/usr/bin/docker rm %p
