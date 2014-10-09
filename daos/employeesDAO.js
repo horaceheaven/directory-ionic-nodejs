@@ -33,7 +33,6 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 				.then(function(employeeCollection){
 					employeeCollection.findOne({'id': id}, function(err, employee){
 						if(err){
-							console.log(err);
 							defered.reject(err);
 						}
 						defered.resolve(employee);
