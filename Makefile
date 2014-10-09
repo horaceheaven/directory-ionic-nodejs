@@ -1,8 +1,9 @@
 REPORTER=xunit
+WORKSPACE=.
 unit-test:
-	@mocha --reporter xunit test/employeesSpec.js > unit-report.xml
+	@mocha --reporter xunit $(WORKSPACE)/test/employeesSpec.js > unit-report.xml
 
 integration-test:
-	@mocha --reporter xunit test/employeesIntegrationSpec.js > integration-report.xml
+	@mocha --reporter xunit $(WORKSPACE)/test/employeesIntegrationSpec.js > integration-report.xml
 
 .PHONY: unit-test integration-test
