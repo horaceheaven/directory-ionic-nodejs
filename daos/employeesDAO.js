@@ -6,13 +6,9 @@ var mongoDBName = process.env["MONGO_DB_NAME"] || "test_db";
 var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://54.82.47.209";
 var mongoDBPort = process.env["MONGO_DB_PORT"] || "27017";
 
-console.log("Mongo DB Name: " + mongoDBName);
-console.log("Mongo DB URL: " + mongoDBUrl);
-console.log("Mongo DB Port: " + mongoDBPort);
 
 if( mongoDBName && mongoDBUrl && mongoDBPort ){
 	connString = mongoDBUrl +':'+ mongoDBPort +'/' + mongoDBName;
-  console.log("Connection string: " + connString);
 }
 
 var EmployeeDAO = (function(client, connString, q, collectionName){
@@ -21,7 +17,6 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 		var defered = q.defer();
 		MongoClient.connect(connString, function(err, db) {
 	 		if(err){
-        console.log("failed to connect to mongodb");
 	 			defered.reject(err);
 	 		}
 
