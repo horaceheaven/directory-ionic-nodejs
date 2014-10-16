@@ -1,6 +1,6 @@
 angular.module('directory.controllers', [])
 
-    .controller('EmployeeListCtrl', function ($scope, Employees) {
+    .controller('EmployeeListCtrl', function ($scope, Employees, $log) {
 
         $scope.searchKey = "";
 
@@ -14,6 +14,8 @@ angular.module('directory.controllers', [])
         }
 
         $scope.employees = Employees.query();
+
+        $log.info('Employee list requested');
     })
 
     .controller('EmployeeDetailCtrl', function($scope, $stateParams, Employees, $location) {
@@ -22,9 +24,11 @@ angular.module('directory.controllers', [])
         branch = $location.absUrl().split("/")[3];
         $scope.branch = branch;
         $scope.employee = Employees.get({employeeId: $stateParams.employeeId});
+        $log.info('Employee ' + $stateParams.employeeId +' details requested');
     })
 
     .controller('EmployeeReportsCtrl', function ($scope, $stateParams, Employees) {
         console.log('reports');
         $scope.employee = Employees.get({employeeId: $stateParams.employeeId, data: 'reports'});
+        $log.info('Employee ' + $stateParams.employeeId +' report generated');
     });
