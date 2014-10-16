@@ -1,10 +1,25 @@
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
-    , q = require('q');
+    , q = require('q')
+    , loggly = require('loggly')
+    , client;
+
+client = loggly.createClient({
+    token: "2a4829c3-7c6e-4c78-a655-c62b26c68966",
+    subdomain: "sigtest",
+    tags: ['NodeJS'],
+    json:true
+});
 
 var mongoDBName = process.env["MONGO_DB_NAME"] || "test_db";
 var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://54.82.47.209";
 var mongoDBPort = process.env["MONGO_DB_PORT"] || "27017";
+
+client.log(	"DB Name: " + mongoDBName + 
+			" Connection String: " + mongoDBUrl + 
+			" Port: " + mongoDBPort
+);
+
 
 
 if( mongoDBName && mongoDBUrl && mongoDBPort ){
@@ -17,6 +32,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 		var defered = q.defer();
 		MongoClient.connect(connString, function(err, db) {
 	 		if(err){
+	 			client.log(err);
 	 			defered.reject(err);
 	 		}
 
@@ -33,6 +49,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 				.then(function(employeeCollection){
 					employeeCollection.findOne({'id': id}, function(err, employee){
 						if(err){
+							client.log(err);
 							defered.reject(err);
 						}
 						defered.resolve(employee);
@@ -49,6 +66,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 			.then(function(employeeCollection){
 				employeeCollection.find({}).toArray(function(err, employees){
 					if(err){
+						client.log(err);
 						defered.reject(err);
 					}
 
@@ -66,6 +84,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 				employeeCollection.find({managerId: managerId})
 					.toArray(function(err, managees){
 						if(err){
+							client.log(err);
 							defered.reject(err);
 						}
 						defered.resolve(managees);
