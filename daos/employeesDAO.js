@@ -12,7 +12,7 @@ client = loggly.createClient({
 });
 
 var mongoDBName = process.env["MONGO_DB_NAME"] || "test_db";
-var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://54.215.56.53";
+var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://10.188.154.61";
 var mongoDBPort = process.env["MONGO_DB_PORT"] || "27017";
 
 client.log(	"DB Name: " + mongoDBName +
