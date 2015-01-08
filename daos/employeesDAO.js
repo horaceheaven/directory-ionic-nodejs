@@ -1,18 +1,29 @@
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format
-    , q = require('q');
+    , q = require('q')
+    , loggly = require('loggly')
+    , client;
+
+client = loggly.createClient({
+    token: "2a4829c3-7c6e-4c78-a655-c62b26c68966",
+    subdomain: "sigtest",
+    tags: ['NodeJS'],
+    json:true
+});
 
 var mongoDBName = process.env["MONGO_DB_NAME"] || "test_db";
-var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://54.82.47.209";
+var mongoDBUrl = process.env["MONGO_DB_URL"] || "mongodb://10.188.154.61";
 var mongoDBPort = process.env["MONGO_DB_PORT"] || "27017";
 
-console.log("Mongo DB Name: " + mongoDBName);
-console.log("Mongo DB URL: " + mongoDBUrl);
-console.log("Mongo DB Port: " + mongoDBPort);
+client.log(	"DB Name: " + mongoDBName +
+			" Connection String: " + mongoDBUrl +
+			" Port: " + mongoDBPort
+);
+
+
 
 if( mongoDBName && mongoDBUrl && mongoDBPort ){
 	connString = mongoDBUrl +':'+ mongoDBPort +'/' + mongoDBName;
-  console.log("Connection string: " + connString);
 }
 
 var EmployeeDAO = (function(client, connString, q, collectionName){
@@ -21,7 +32,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 		var defered = q.defer();
 		MongoClient.connect(connString, function(err, db) {
 	 		if(err){
-        console.log("failed to connect to mongodb");
+	 			client.log(err);
 	 			defered.reject(err);
 	 		}
 
@@ -38,7 +49,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 				.then(function(employeeCollection){
 					employeeCollection.findOne({'id': id}, function(err, employee){
 						if(err){
-							console.log(err);
+							client.log(err);
 							defered.reject(err);
 						}
 						defered.resolve(employee);
@@ -55,6 +66,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 			.then(function(employeeCollection){
 				employeeCollection.find({}).toArray(function(err, employees){
 					if(err){
+						client.log(err);
 						defered.reject(err);
 					}
 
@@ -72,6 +84,7 @@ var EmployeeDAO = (function(client, connString, q, collectionName){
 				employeeCollection.find({managerId: managerId})
 					.toArray(function(err, managees){
 						if(err){
+							client.log(err);
 							defered.reject(err);
 						}
 						defered.resolve(managees);

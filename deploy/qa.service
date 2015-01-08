@@ -1,0 +1,17 @@
+[Unit]
+Description=nodeapp
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=5min
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=/usr/bin/docker pull medullan/ionic-nodejs-qa:%p
+ExecStart=/usr/bin/docker run -e "NODE_ENV=%p" --rm --name %p -p %i:5000 medullan/ionic-nodejs-qa:%p
+ExecStartPost=/usr/bin/etcdctl set /app/%p/%i ${COREOS_PRIVATE_IPV4}:%i
+ExecStop=/usr/bin/docker kill %p
+ExecStopPost=/usr/bin/etcdctl rm /app/%p/%i
+
+[X-Fleet]
+X-Conflicts=%p@%i.service

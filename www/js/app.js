@@ -1,4 +1,4 @@
-angular.module('directory', ['ionic', 'directory.controllers', 'directory.services'])
+angular.module('directory', ['ionic', 'directory.controllers', 'directory.services', 'ngLoggly'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -14,8 +14,8 @@ angular.module('directory', ['ionic', 'directory.controllers', 'directory.servic
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
-
+    .config(function ($stateProvider, $urlRouterProvider, LogglyLoggerProvider) {
+        LogglyLoggerProvider.inputToken( '2a4829c3-7c6e-4c78-a655-c62b26c68966' );
         $stateProvider
 
             .state('search', {
