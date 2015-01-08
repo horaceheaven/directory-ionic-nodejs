@@ -5,7 +5,7 @@ MAINTAINER Horace Heaven "hheaven@medullan.com"
 RUN apt-get -y update
 
 # Install nodejs programs
-RUN apt-get -y install nodejs=0.10.25~dfsg2-2ubuntu1 npm
+RUN apt-get -y install nodejs=0.10.25~dfsg2-2ubuntu1 nodejs-legacy npm
 
 EXPOSE 5000
 
